@@ -6,30 +6,30 @@ class App extends Component {
     return (
       <div className="container">
         <div className="text-center">
-          <h1>Quản Lý Công Việc</h1>
+          <h1>Work manage</h1>
           <hr />
         </div>
         <div className="row">
           <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <div className="panel panel-warning">
               <div className="panel-heading">
-                <h3 className="panel-title">Thêm Công Việc</h3>
+                <h3 className="panel-title">Add a work</h3>
               </div>
               <div className="panel-body">
                 <form>
                   <div className="form-group">
-                    <label>Tên :</label>
+                    <label>Name :</label>
                     <input type="text" className="form-control" />
                   </div>
-                  <label>Trạng Thái :</label>
+                  <label>Status :</label>
                   <select className="form-control" required="required">
-                    <option value="1">Kích Hoạt</option>
-                    <option value="0">Ẩn</option>
+                    <option value="1">Active</option>
+                    <option value="0">Deactive</option>
                   </select>
                   <br />
                   <div className="text-center">
-                    <button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
-                                <button type="submit" className="btn btn-danger">Hủy Bỏ</button>
+                    <button type="submit" className="btn btn-warning">Add</button>&nbsp;
+                                <button type="submit" className="btn btn-danger">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -37,7 +37,7 @@ class App extends Component {
           </div>
           <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
             <button type="button" className="btn btn-primary">
-              <span className="fa fa-plus mr-5"></span>Thêm Công Việc
+              <span className="fa fa-plus mr-5"></span>Add work
                 </button>
             <div className="row mt-15">
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -45,7 +45,7 @@ class App extends Component {
                   <input type="text" className="form-control" placeholder="Nhập từ khóa..." />
                   <span className="input-group-btn">
                     <button className="btn btn-primary" type="button">
-                      <span className="fa fa-search mr-5"></span>Tìm
+                      <span className="fa fa-search mr-5"></span>Search
                             </button>
                   </span>
                 </div>
@@ -53,26 +53,26 @@ class App extends Component {
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div className="dropdown">
                   <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Sắp Xếp <span className="fa fa-caret-square-o-down ml-5"></span>
+                    Filter <span className="fa fa-caret-square-o-down ml-5"></span>
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li>
                       <a role="button">
                         <span className="fa fa-sort-alpha-asc pr-5">
-                          Tên A-Z
+                          Name A-Z
                                                 </span>
                       </a>
                     </li>
                     <li>
                       <a role="button">
                         <span className="fa fa-sort-alpha-desc pr-5">
-                          Tên Z-A
+                          Name Z-A
                                                 </span>
                       </a>
                     </li>
                     <li role="separator" className="divider"></li>
-                    <li><a role="button">Trạng Thái Kích Hoạt</a></li>
-                    <li><a role="button">Trạng Thái Ẩn</a></li>
+                    <li><a role="button">Status : Active</a></li>
+                    <li><a role="button">Status : Deactive</a></li>
                   </ul>
                 </div>
               </div>
@@ -82,10 +82,10 @@ class App extends Component {
                 <table className="table table-bordered table-hover">
                   <thead>
                     <tr>
-                      <th className="text-center">STT</th>
-                      <th className="text-center">Tên</th>
-                      <th className="text-center">Trạng Thái</th>
-                      <th className="text-center">Hành Động</th>
+                      <th className="text-center">Number</th>
+                      <th className="text-center">Name</th>
+                      <th className="text-center">Status</th>
+                      <th className="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -96,9 +96,9 @@ class App extends Component {
                       </td>
                       <td>
                         <select className="form-control">
-                          <option value="-1">Tất Cả</option>
-                          <option value="0">Ẩn</option>
-                          <option value="1">Kích Hoạt</option>
+                          <option value="-1">All</option>
+                          <option value="0">Deactive</option>
+                          <option value="1">Active</option>
                         </select>
                       </td>
                       <td></td>
@@ -113,11 +113,11 @@ class App extends Component {
                       </td>
                       <td className="text-center">
                         <button type="button" className="btn btn-warning">
-                          <span className="fa fa-pencil mr-5"></span>Sửa
+                          <span className="fa fa-pencil mr-5"></span>Update
                                         </button>
                         &nbsp;
                                         <button type="button" className="btn btn-danger">
-                          <span className="fa fa-trash mr-5"></span>Xóa
+                          <span className="fa fa-trash mr-5"></span>Delete
                                         </button>
                       </td>
                     </tr>
