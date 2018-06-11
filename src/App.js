@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import TaskForm from './components/TaskForm';
 import Control from './components/Control';
+import TaskList from './components/TaskList';
 
 class App extends Component {
   render() {
@@ -21,52 +22,7 @@ class App extends Component {
                 </button>
             <Control />
             <div className="row mt-15">
-              <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <table className="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th className="text-center">Number</th>
-                      <th className="text-center">Name</th>
-                      <th className="text-center">Status</th>
-                      <th className="text-center">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td>
-                        <input type="text" className="form-control" />
-                      </td>
-                      <td>
-                        <select className="form-control">
-                          <option value="-1">All</option>
-                          <option value="0">Deactive</option>
-                          <option value="1">Active</option>
-                        </select>
-                      </td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Học lập trình</td>
-                      <td className="text-center">
-                        <span className="label label-success">
-                          Kích Hoạt
-                                                </span>
-                      </td>
-                      <td className="text-center">
-                        <button type="button" className="btn btn-warning">
-                          <span className="fa fa-pencil mr-5"></span>Update
-                                        </button>
-                        &nbsp;
-                                        <button type="button" className="btn btn-danger">
-                          <span className="fa fa-trash mr-5"></span>Delete
-                                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+             <TaskList/>
             </div>
           </div>
         </div>
