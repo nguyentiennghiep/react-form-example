@@ -7,7 +7,8 @@ class TaskList extends Component {
     var { task } = this.props;
     var elemTasks = this.props.tasks.map((task, index) =>
       <TaskItem key={task.id} task={task} index={index} onUpdateStatus = {this.props.onUpdateStatus}
-      onDelete = {this.props.onDelete}/>);
+      onDelete = {this.props.onDelete}
+      onUpdate = {this.props.onUpdate}/>);
     return (
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <table className="table table-bordered table-hover">
