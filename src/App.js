@@ -112,6 +112,10 @@ class App extends Component {
     this.onShowForm();
   }
 
+  onFilter = (name , status) =>{
+    console.log(name +'-' + typeof status);
+  }
+
   render() {
     var { tasks, isDisplayForm, taskEditing } = this.state;
     return (
@@ -138,7 +142,8 @@ class App extends Component {
               <TaskList tasks={tasks}
                 onUpdateStatus={this.onUpdateStatus}
                 onDelete={this.onDelete}
-                onUpdate={this.onUpdate} />
+                onUpdate={this.onUpdate} 
+                onFilter={this.onFilter}/>
             </div>
           </div>
         </div>

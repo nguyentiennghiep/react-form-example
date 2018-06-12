@@ -3,6 +3,30 @@ import TaskItem from './TaskItem';
 
 class TaskList extends Component {
 
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      filterName : '',
+      filterStatus : -1
+    };
+
+  }
+
+  onChange = (envent) =>
+  {
+    var target = envent.target;
+    var name = target.name;
+    var value = target.value;
+    this.props.onFilter(
+      name === "filterName" ? value : this.state.filterName,
+      name === "filterStatus" ? value : this.state.filterStatus
+    );
+    this.setState({[name] : value});
+    
+    //console.log(this.state.filterName,this.state.filterStatus);
+  }
+
   render() {
     var { task } = this.props;
     var elemTasks = this.props.tasks.map((task, index) =>
@@ -24,13 +48,15 @@ class TaskList extends Component {
             <tr>
               <td></td>
               <td>
-                <input type="text" className="form-control" />
+                <input type="text" className="form-control" name = "filterName"
+                value = {this.setState.filterName} onChange = {this.onChange}/>
               </td>
               <td>
-                <select className="form-control">
-                  <option value="-1">All</option>
-                  <option value="0">Deactive</option>
-                  <option value="1">Active</option>
+                <select className="form-control"  name = "filterStatus"
+                value = {this.setState.filterStaus} onChange = {this.onChange}>
+                  <option value={-1}>All</option>
+                  <option value={0}>Deactive</option>
+                  <option value={1}>Active</option>
                 </select>
               </td>
               <td></td>
