@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import TaskItem from './TaskItem';
 
 class TaskList extends Component {
+
   render() {
+    var { task } = this.props;
+    var elemTasks = this.props.tasks.map((task, index) =>
+      <TaskItem key={task.id} task={task} index={index} />);
     return (
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <table className="table table-bordered table-hover">
@@ -29,10 +33,7 @@ class TaskList extends Component {
               </td>
               <td></td>
             </tr>
-
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
+            {elemTasks}
           </tbody>
         </table>
       </div>

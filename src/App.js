@@ -7,7 +7,18 @@ import TaskList from './components/TaskList';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { tasks: [] };
+    this.state = { tasks: [],
+    isDisplayForm : false };
+    
+  }
+
+  componentWillMount()
+  {
+    if(localStorage && localStorage.getItem('tasks'))
+    {
+      var tasks = JSON.parse(localStorage.getItem('tasks'));
+      this.setState({tasks : tasks});
+    }
   }
 
   onGenerateData = () => {
@@ -28,7 +39,8 @@ class App extends Component {
         status: true
       }
     ];
-    this.setState({task : tasks});
+    
+    localStorage.setItem('tasks',JSON.stringify(tasks));
   }
 
   s4() {
@@ -39,7 +51,23 @@ class App extends Component {
     return this.s4()+this.s4()+'-'+this.s4()+this.s4()+'-'+this.s4()+this.s4()+'-'+this.s4()+this.s4()+this.s4();
   }
 
+  onToggleForm = () =>
+  {
+    if(this.state.isDisplayForm === true)
+    {
+      this.setState({isDisplayForm : false});
+    }
+    else{this.setState({isDisplayForm : true});}
+    
+  }
+
+  onCloseForm = () =>
+  {
+    return this.setState({isDisplayForm : false});
+  }
+
   render() {
+    var {tasks , isDisplayForm} = this.state; 
     return (
       <div className="container">
         <div className="text-center">
@@ -47,12 +75,14 @@ class App extends Component {
           <hr />
         </div>
         <div className="row">
-          <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <TaskForm />
+          <div className= {isDisplayForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : 
+          ""}>
+            {isDisplayForm ?<TaskForm onCloseForm = {this.onCloseForm}/> : ""}
           </div>
-          <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-            <button type="button" className="btn btn-primary mr-5">
-              Add work
+          <div className={isDisplayForm ? "col-xs-8 col-sm-8 col-md-8 col-lg-8" :
+          "col-xs-12 col-sm-12 col-md-12 col-lg-12"}>
+            <button type="button" className="btn btn-primary mr-5" onClick = {this.onToggleForm}>
+              <span className = "fa fa-plus mr-5"></span>Add work
                 </button>
 
             <button type="button"
@@ -62,7 +92,7 @@ class App extends Component {
                 </button>
             <Control />
             <div className="row mt-15">
-              <TaskList />
+              <TaskList tasks = {tasks}/>
             </div>
           </div>
         </div>
