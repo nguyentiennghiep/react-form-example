@@ -66,6 +66,13 @@ class App extends Component {
     return this.setState({isDisplayForm : false});
   }
 
+  onSubmit = (data) =>{
+    var {tasks} = this.state;
+    data.id = this.generateID();
+    tasks.push(data);
+    this.setState({tasks : tasks});
+    localStorage.setItem('tasks',JSON.stringify(tasks));
+  }
   render() {
     var {tasks , isDisplayForm} = this.state; 
     return (
@@ -77,7 +84,9 @@ class App extends Component {
         <div className="row">
           <div className= {isDisplayForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : 
           ""}>
-            {isDisplayForm ?<TaskForm onCloseForm = {this.onCloseForm}/> : ""}
+            {isDisplayForm ?<TaskForm onCloseForm = {this.onCloseForm}
+            onSubmit = {this.onSubmit}
+            /> : ""}
           </div>
           <div className={isDisplayForm ? "col-xs-8 col-sm-8 col-md-8 col-lg-8" :
           "col-xs-12 col-sm-12 col-md-12 col-lg-12"}>
