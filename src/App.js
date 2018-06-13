@@ -15,7 +15,9 @@ class App extends Component {
         name: '',
         status: -1
       },
-      keyword :''
+      keyword: '',
+      sortName: '',
+      sortValue: 1
     };
 
   }
@@ -127,15 +129,24 @@ class App extends Component {
         status: status
       }
     });
-    //console.log(this.state.filter);
+
   }
 
   onSearch = (keyword) => {
-      this.setState({keyword : keyword});
+    this.setState({ keyword: keyword });
+  }
+
+  onSort = (sortName, sortValue) => {
+
+    this.setState({
+      sortName: sortName,
+      sortValue: sortValue
+    });
+    
   }
 
   render() {
-    var { tasks, isDisplayForm, taskEditing, filter, keyword } = this.state;
+    var { tasks, isDisplayForm, taskEditing, filter, keyword, sortName, sortValue } = this.state;
     if (filter) {
       if (filter.name) {
         tasks = tasks.filter((task) => {
@@ -149,11 +160,28 @@ class App extends Component {
       }
     }
 
-    if(keyword)
-    {
-      tasks = tasks.filter((task)=>{
-        return task.name.toLowerCase().indexOf(keyword.toLowerCase())!== -1;
+    if (keyword) {
+      tasks = tasks.filter((task) => {
+        return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
       })
+    }
+    if (sortName === 'name') {
+      tasks.sort((a, b) => {
+        if (a.name.toUpperCase() > b.name.toUpperCase())
+         return sortValue;
+        else if (a.name.toUpperCase() < b.name.toUpperCase())
+          return -sortValue;
+        else return 0;
+      });
+    }
+    if (sortName === 'status') {
+      tasks.sort((a, b) => {
+        if (a.status > b.status)
+          return -sortValue;
+        else if (a.status < b.status)
+          return sortValue;
+        else return 0;
+      });
     }
     return (
       <div className="container">
@@ -174,7 +202,8 @@ class App extends Component {
             <button type="button" className="btn btn-primary mr-5" onClick={this.onToggleForm}>
               <span className="fa fa-plus mr-5"></span>Add work
                 </button>
-            <Control onSearch={this.onSearch} />
+            <Control onSearch={this.onSearch}
+              onSort={this.onSort} />
             <div className="row mt-15">
               <TaskList tasks={tasks}
                 onUpdateStatus={this.onUpdateStatus}

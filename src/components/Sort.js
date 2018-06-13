@@ -7,8 +7,8 @@ class Sort extends Component {
         super(props);
         this.state = {
             sort: {
-                name: 'name',
-                value: -1
+                name: '',
+                value: 0
             }
         };
     }
@@ -20,10 +20,10 @@ class Sort extends Component {
                 value: sortValue
             }
         });
-        
+        this.props.onSort(sortName, sortValue);
     }
     render() {
-        var {sort} = this.state;
+        var { sort } = this.state;
         return (
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div className="dropdown">
@@ -32,8 +32,8 @@ class Sort extends Component {
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li>
-                            <a role="button" onClick={() => this.onClick('name', 1)} 
-                            className={sort.name === 'name' && sort.value === 1 ? "sort_selected" : ''}>
+                            <a role="button" onClick={() => this.onClick('name', 1)}
+                                className={sort.name === 'name' && sort.value === 1 ? "sort_selected" : ''}>
                                 <span className="fas fa-sort-alpha-down pr-5">
                                     Name A-Z
                                   </span>
@@ -41,7 +41,7 @@ class Sort extends Component {
                         </li>
                         <li>
                             <a role="button" onClick={() => this.onClick('name', -1)}
-                            className={sort.name === 'name' && sort.value === -1 ? "sort_selected" : ''}>
+                                className={sort.name === 'name' && sort.value === -1 ? "sort_selected" : ''}>
                                 <span className="fas fa-sort-alpha-up pr-5">
                                     Name Z-A
                                   </span>
@@ -49,9 +49,9 @@ class Sort extends Component {
                         </li>
                         <li role="separator" className="divider"></li>
                         <li><a role="button" onClick={() => this.onClick('status', 1)}
-                        className={sort.name === 'status' && sort.value === 1 ? "sort_selected" : ''}>Status : Active</a></li>
-                        <li><a role="button" onClick={() => this.onClick('status', -1)} 
-                        className={sort.name === 'status' && sort.value === -1 ? "sort_selected" : ''}>Status : Deactive</a></li>
+                            className={sort.name === 'status' && sort.value === 1 ? "sort_selected" : ''}>Status : Active</a></li>
+                        <li><a role="button" onClick={() => this.onClick('status', -1)}
+                            className={sort.name === 'status' && sort.value === -1 ? "sort_selected" : ''}>Status : Deactive</a></li>
                     </ul>
                 </div>
             </div>
