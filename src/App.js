@@ -10,7 +10,11 @@ class App extends Component {
     this.state = {
       tasks: [],
       isDisplayForm: false,
-      taskEditing: null
+      taskEditing: null,
+      filter: {
+        name: '',
+        status: -1
+      }
     };
 
   }
@@ -112,12 +116,34 @@ class App extends Component {
     this.onShowForm();
   }
 
-  onFilter = (name , status) =>{
-    console.log(name +'-' + typeof status);
+  onFilter = (name, status) => {
+    
+    status = parseInt(status,10);
+    
+    this.setState({
+      filter: {
+        name: name,
+        status: status
+      }
+    });
+    //console.log(this.state.filter);
   }
 
   render() {
-    var { tasks, isDisplayForm, taskEditing } = this.state;
+    var { tasks, isDisplayForm, taskEditing, filter } = this.state;
+    if (filter) {
+      if (filter.name) {
+        tasks = tasks.filter((task) => {
+          return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1;
+        })
+      }
+      if(filter.status !== -1)
+      {
+        tasks = tasks.filter((task)=>{
+          return task.status === (filter.status === 1 ? true : false );
+        });
+      }
+    }
     return (
       <div className="container">
         <div className="text-center">
@@ -142,8 +168,8 @@ class App extends Component {
               <TaskList tasks={tasks}
                 onUpdateStatus={this.onUpdateStatus}
                 onDelete={this.onDelete}
-                onUpdate={this.onUpdate} 
-                onFilter={this.onFilter}/>
+                onUpdate={this.onUpdate}
+                onFilter={this.onFilter} />
             </div>
           </div>
         </div>

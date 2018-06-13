@@ -32,7 +32,7 @@ class TaskItem extends Component {
                     &nbsp;
                           <button type="button" className="btn btn-danger"
                         onClick={this.onDelete}>
-                        <span className="fa fa-trash mr-5"></span>Delete
+                        <span className="fa fa-trash mr-5" ></span>Delete
                           </button>
                 </td>
             </tr>
