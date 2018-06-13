@@ -27,7 +27,7 @@ class TaskItem extends Component {
                 </td>
                 <td className="text-center">
                     <button type="button" className="btn btn-warning" onClick ={this.onUpdate}>
-                        <span className="fa fa-pencil mr-5"  ></span>Update
+                        <span className="fas fa-pencil-alt mr-5"  ></span>Update
                           </button>
                     &nbsp;
                           <button type="button" className="btn btn-danger"

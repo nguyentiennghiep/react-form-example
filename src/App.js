@@ -14,7 +14,8 @@ class App extends Component {
       filter: {
         name: '',
         status: -1
-      }
+      },
+      keyword :''
     };
 
   }
@@ -117,9 +118,9 @@ class App extends Component {
   }
 
   onFilter = (name, status) => {
-    
-    status = parseInt(status,10);
-    
+
+    status = parseInt(status, 10);
+
     this.setState({
       filter: {
         name: name,
@@ -129,20 +130,30 @@ class App extends Component {
     //console.log(this.state.filter);
   }
 
+  onSearch = (keyword) => {
+      this.setState({keyword : keyword});
+  }
+
   render() {
-    var { tasks, isDisplayForm, taskEditing, filter } = this.state;
+    var { tasks, isDisplayForm, taskEditing, filter, keyword } = this.state;
     if (filter) {
       if (filter.name) {
         tasks = tasks.filter((task) => {
           return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1;
         })
       }
-      if(filter.status !== -1)
-      {
-        tasks = tasks.filter((task)=>{
-          return task.status === (filter.status === 1 ? true : false );
+      if (filter.status !== -1) {
+        tasks = tasks.filter((task) => {
+          return task.status === (filter.status === 1 ? true : false);
         });
       }
+    }
+
+    if(keyword)
+    {
+      tasks = tasks.filter((task)=>{
+        return task.name.toLowerCase().indexOf(keyword.toLowerCase())!== -1;
+      })
     }
     return (
       <div className="container">
@@ -163,7 +174,7 @@ class App extends Component {
             <button type="button" className="btn btn-primary mr-5" onClick={this.onToggleForm}>
               <span className="fa fa-plus mr-5"></span>Add work
                 </button>
-            <Control />
+            <Control onSearch={this.onSearch} />
             <div className="row mt-15">
               <TaskList tasks={tasks}
                 onUpdateStatus={this.onUpdateStatus}
